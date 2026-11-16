@@ -1,0 +1,139 @@
+/* Chubby Monkey AI — shared site styles. Mobile-first. */
+:root {
+  --teal-900: #0F766E;
+  --teal-300: #2DD4BF;
+  --banana: #FFC93C;
+  --navy: #1E293B;
+  --ink: #1E293B;
+  --muted: #475569;
+  --line: #E2E8F0;
+  --paper: #FFFFFF;
+  --bg: #F8FAFC;
+  --danger: #B91C1C;
+  --radius: 18px;
+  --shadow: 0 10px 30px rgba(30, 41, 59, .12);
+  --head: 'Luckiest Guy', 'Arial Black', sans-serif;
+  --body: 'Fredoka', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+}
+img { max-width: 100%; display: block; }
+a { color: var(--teal-900); }
+h1, h2, h3 { font-family: var(--head); font-weight: 400; letter-spacing: .5px; line-height: 1.1; margin: 0 0 .4em; }
+
+.wrap { width: 100%; max-width: 680px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- header / hero ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--teal-900) 0%, var(--teal-300) 100%);
+  color: #fff;
+  padding: 20px 0 64px;
+}
+.brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-family: var(--head); font-size: 20px; }
+.brand .logo { width: 40px; height: 40px; border-radius: 50%; background: var(--banana); display: grid; place-items: center; font-size: 22px; }
+.hero h1 { font-size: clamp(32px, 9vw, 52px); margin-top: 28px; text-shadow: 0 3px 0 rgba(0,0,0,.15); }
+.hero h1 .hl { color: var(--banana); }
+.hero p.lead { font-size: 19px; margin: 0; opacity: .95; max-width: 34ch; }
+
+/* ---------- cards ---------- */
+.card {
+  background: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 18px;
+  margin: -40px 0 20px;
+  position: relative;
+}
+.card + .card { margin-top: 0; }
+.card h2 { font-size: 26px; color: var(--navy); }
+
+/* ---------- inputs ---------- */
+.field { margin: 18px 0 22px; }
+.field-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.field-top label { font-weight: 600; }
+.num {
+  display: inline-flex; align-items: center; gap: 2px;
+  border: 2px solid var(--line); border-radius: 10px; padding: 2px 8px; background: #fff;
+  font-weight: 600;
+}
+.num input {
+  width: 5.2ch; border: 0; font: inherit; text-align: right; color: var(--navy); background: transparent;
+  -moz-appearance: textfield; appearance: textfield;
+}
+.num input::-webkit-outer-spin-button, .num input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.num input:focus { outline: none; }
+.num:focus-within { border-color: var(--teal-300); }
+
+input[type=range] { width: 100%; height: 32px; accent-color: var(--teal-900); background: transparent; }
+
+/* ---------- result ---------- */
+.result {
+  background: var(--navy); color: #fff; border-radius: var(--radius);
+  padding: 22px 18px; text-align: center; margin-top: 8px;
+}
+.result .label { text-transform: uppercase; letter-spacing: 1px; font-size: 13px; opacity: .8; }
+.result .big { font-family: var(--head); font-size: clamp(40px, 13vw, 60px); color: var(--banana); line-height: 1.05; margin: 4px 0; }
+.result .year { font-size: 18px; }
+.result .year strong { color: var(--banana); }
+.result .compare { margin: 12px 0 0; font-size: 16px; opacity: .9; }
+
+/* ---------- gate form ---------- */
+.gate h2 { margin-bottom: 4px; }
+.gate .sub { color: var(--muted); margin: 0 0 14px; }
+.form-row { margin-bottom: 14px; }
+.form-row label { display: block; font-weight: 600; margin-bottom: 4px; }
+.form-row .opt { font-weight: 400; color: var(--muted); }
+.form-row input[type=text], .form-row input[type=email], .form-row input[type=tel], .form-row select {
+  width: 100%; font: inherit; padding: 12px; border: 2px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink);
+}
+.form-row input:focus, .form-row select:focus { outline: none; border-color: var(--teal-300); }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; margin: 6px 0 16px; }
+.check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--teal-900); flex: none; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.btn {
+  display: inline-block; width: 100%; text-align: center; text-decoration: none; cursor: pointer;
+  font-family: var(--head); font-size: 20px; letter-spacing: .5px;
+  background: var(--banana); color: var(--navy); border: 0; border-radius: 14px; padding: 16px 18px;
+  box-shadow: 0 4px 0 #D9A21F;
+  transition: transform .05s ease, box-shadow .05s ease;
+}
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #D9A21F; }
+.btn[disabled] { opacity: .6; cursor: wait; }
+.btn.teal { background: var(--teal-900); color: #fff; box-shadow: 0 4px 0 #0B5953; }
+
+.privacy { font-size: 14px; color: var(--muted); margin: 12px 0 0; text-align: center; }
+.error { color: var(--danger); font-weight: 600; margin: 10px 0 0; }
+.error:empty { display: none; }
+
+/* ---------- thank-you ---------- */
+.thanks { text-align: center; }
+.thanks .emoji { font-size: 48px; }
+.thanks p { margin: 0 0 16px; }
+
+/* ---------- landing ---------- */
+.niche-links { display: grid; gap: 14px; margin-top: 8px; }
+.niche-link {
+  display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--navy);
+  border: 2px solid var(--line); border-radius: var(--radius); padding: 16px; background: #fff;
+}
+.niche-link:hover, .niche-link:focus { border-color: var(--teal-300); }
+.niche-link .ico { font-size: 32px; flex: none; }
+.niche-link strong { font-family: var(--head); font-weight: 400; font-size: 20px; display: block; }
+.niche-link span { color: var(--muted); font-size: 15px; }
+.steps { padding-left: 1.2em; margin: 0; }
+.steps li { margin-bottom: 8px; }
+
+footer { text-align: center; color: var(--muted); font-size: 14px; padding: 12px 16px 36px; }
+footer a { color: var(--muted); }
+
+[hidden] { display: none !important; }

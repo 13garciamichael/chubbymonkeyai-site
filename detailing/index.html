@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missed-Call Calculator for Detailing Shops | Chubby Monkey AI</title>
+  <meta name="description" content="See how much revenue missed calls cost your detailing, ceramic coating, PPF or tint shop. Takes 60 seconds.">
+  <meta property="og:title" content="Missed-Call Calculator for Detailing Shops">
+  <meta property="og:description" content="See how much revenue missed calls cost your shop. Takes 60 seconds.">
+  <meta name="theme-color" content="#0F766E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%B5%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body data-niche="auto">
+  <header class="hero">
+    <div class="wrap">
+      <a class="brand" href="/"><span class="logo" aria-hidden="true">🐵</span> Chubby Monkey AI</a>
+      <h1>How much are <span class="hl">missed calls</span> costing your shop?</h1>
+      <p class="lead">For detailing, ceramic coating, PPF &amp; tint shops. Move the sliders. Takes 60 seconds.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" aria-labelledby="calc-h">
+      <h2 id="calc-h">Missed-Call Calculator</h2>
+      <p id="calc-error" class="error"></p>
+
+      <div class="field">
+        <div class="field-top">
+          <label for="r-callsPerWeek">Calls per week</label>
+          <span class="num"><input id="n-callsPerWeek" type="number" inputmode="numeric" min="0" aria-label="Calls per week"></span>
+        </div>
+        <input id="r-callsPerWeek" type="range" min="5" max="200" step="1">
+      </div>
+
+      <div class="field">
+        <div class="field-top">
+          <label for="r-missedPct">% of calls missed</label>
+          <span class="num"><input id="n-missedPct" type="number" inputmode="numeric" min="0" max="100" aria-label="Percent of calls missed">%</span>
+        </div>
+        <input id="r-missedPct" type="range" min="0" max="80" step="1">
+      </div>
+
+      <div class="field">
+        <div class="field-top">
+          <label for="r-avgTicket">Average job value</label>
+          <span class="num">$<input id="n-avgTicket" type="number" inputmode="numeric" min="0" aria-label="Average job value in dollars"></span>
+        </div>
+        <input id="r-avgTicket" type="range" min="50" max="5000" step="10">
+      </div>
+
+      <div class="field">
+        <div class="field-top">
+          <label for="r-closeRate">Close rate on calls you answer</label>
+          <span class="num"><input id="n-closeRate" type="number" inputmode="numeric" min="0" max="100" aria-label="Close rate percent">%</span>
+        </div>
+        <input id="r-closeRate" type="range" min="5" max="90" step="1">
+      </div>
+
+      <div class="result" aria-live="polite">
+        <div class="label">Revenue lost to missed calls</div>
+        <div class="big"><span id="out-month">$0</span><small style="font-size:.4em">/mo</small></div>
+        <div class="year">That's <strong id="out-year">$0</strong> a year.</div>
+        <p class="compare" id="out-compare"></p>
+      </div>
+    </section>
+
+    <section class="card gate" id="gate" aria-labelledby="gate-h">
+      <h2 id="gate-h">Email me the full breakdown + 3 fixes</h2>
+      <p class="sub">Your numbers, plus 3 things you can do this week to stop losing those calls.</p>
+      <form id="gate-form" novalidate>
+        <div class="form-row">
+          <label for="f-name">Your name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="100">
+        </div>
+        <div class="form-row">
+          <label for="f-business">Business name</label>
+          <input id="f-business" name="business" type="text" autocomplete="organization" required maxlength="150">
+        </div>
+        <div class="form-row">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200">
+        </div>
+        <div class="form-row">
+          <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+        </div>
+        <div class="form-row">
+          <label for="f-business-type">Business type</label>
+          <select id="f-business-type" name="business_type" required></select>
+        </div>
+        <label class="check">
+          <input type="checkbox" name="tips_opt_in" value="yes" checked>
+          <span>Send me occasional tips (unsubscribe anytime)</span>
+        </label>
+        <div class="hp" aria-hidden="true">
+          <label>Leave this empty <input type="text" name="botcheck" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <button class="btn" id="submit-btn" type="submit">Email me the breakdown</button>
+        <p id="form-error" class="error" role="alert"></p>
+        <p class="privacy">Used only to send your breakdown and tips. Never sold.</p>
+      </form>
+    </section>
+
+    <section class="card thanks" id="thanks" hidden aria-live="polite">
+      <div class="emoji" aria-hidden="true">📩</div>
+      <h2>On its way<span id="thanks-name"></span>!</h2>
+      <p>Check your inbox in the next few minutes (and the promotions tab, just in case).</p>
+      <p><strong>Want me to look at your actual call setup?</strong><br>Free 20-min Missed-Call Audit.</p>
+      <a class="btn teal" id="book-link" href="#" target="_blank" rel="noopener">Book my free audit</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Chubby Monkey AI · We answer the calls you miss.<br><a href="mailto:michael@chubbymonkeyai.com">michael@chubbymonkeyai.com</a></p>
+  </footer>
+
+  <noscript><p class="wrap error">This calculator needs JavaScript turned on.</p></noscript>
+  <script src="/assets/config.js"></script>
+  <script src="/assets/calc.js"></script>
+</body>
+</html>
