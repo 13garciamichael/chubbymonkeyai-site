@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unsubscribe | Chubby Monkey AI</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0F766E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%B5%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <a class="brand" href="/"><span class="logo" aria-hidden="true">🐵</span> Chubby Monkey AI</a>
+      <h1>Unsubscribe</h1>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="card" id="ask">
+      <p>Click below and you won't get any more emails from Chubby Monkey AI.</p>
+      <button class="btn" id="unsub-btn" type="button">Unsubscribe me</button>
+      <p id="unsub-error" class="error" role="alert"></p>
+    </section>
+    <section class="card" id="no-token" hidden>
+      <p>This link is missing its code. Reply "stop" to any of my emails, or email <a href="mailto:michael@chubbymonkeyai.com?subject=unsubscribe">michael@chubbymonkeyai.com</a>, and I'll take you off the list.</p>
+    </section>
+    <section class="card thanks" id="done" hidden aria-live="polite">
+      <div class="emoji" aria-hidden="true">👋</div>
+      <h2>You're unsubscribed.</h2>
+      <p>You won't get any more emails from me. It can take up to 15 minutes to go through.</p>
+    </section>
+  </main>
+  <script src="/assets/config.js"></script>
+  <script>
+    (function () {
+      var CFG = window.CM_CONFIG || {};
+      var token = new URLSearchParams(location.search).get('t') || '';
+      var $ = function (id) { return document.getElementById(id); };
+      if (!/^[a-f0-9]{16,64}$/i.test(token)) {
+        $('ask').hidden = true;
+        $('no-token').hidden = false;
+        return;
+      }
+      $('unsub-btn').addEventListener('click', async function () {
+        var btn = $('unsub-btn');
+        var err = $('unsub-error');
+        err.textContent = '';
+        btn.disabled = true;
+        btn.textContent = 'Unsubscribing…';
+        try {
+          var res = await fetch(CFG.formEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+              access_key: CFG.formAccessKey,
+              subject: 'Unsubscribe request',
+              from_name: 'Unsubscribe page',
+              botcheck: '',
+              kind: 'unsubscribe',
+              lead_token: token,
+            }),
+          });
+          var body = await res.json().catch(function () { return {}; });
+          if (!res.ok || body.success !== true) throw new Error(body.message || 'Request failed');
+          $('ask').hidden = true;
+          $('done').hidden = false;
+        } catch (e) {
+          btn.disabled = false;
+          btn.textContent = 'Unsubscribe me';
+          err.textContent = 'That didn\'t go through. Try again, or reply "stop" to any of my emails.';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
